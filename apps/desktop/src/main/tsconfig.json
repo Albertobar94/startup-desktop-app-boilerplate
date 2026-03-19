@@ -1,0 +1,11 @@
+{
+  "extends": "@acme/config/tsconfig/electron-main",
+  "compilerOptions": {
+    "outDir": "../../dist/main",
+    "rootDir": ".",
+    "paths": {
+      "@main/*": ["./*"]
+    }
+  },
+  "include": ["."]
+}

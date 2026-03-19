@@ -3,6 +3,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import type { SessionInterface, UserInterface } from "@acme/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
+import { mapSupabaseSession } from "../lib/session-mapper";
 
 async function fetchSession(): Promise<{
   user: UserInterface | null;
@@ -23,23 +24,7 @@ async function fetchSession(): Promise<{
     return { user: null, session: null };
   }
 
-  return {
-    user: {
-      id: session.user.id,
-      email: session.user.email ?? "",
-      fullName: session.user.user_metadata?.full_name ?? null,
-      avatarUrl: session.user.user_metadata?.avatar_url ?? null,
-      createdAt: session.user.created_at,
-    },
-    session: {
-      accessToken: session.access_token,
-      refreshToken: session.refresh_token,
-      expiresAt: session.expires_at ?? 0,
-      userId: session.user.id,
-      email: session.user.email ?? "",
-      fullName: session.user.user_metadata?.full_name ?? null,
-    },
-  };
+  return mapSupabaseSession(session);
 }
 
 export function useSession(): {

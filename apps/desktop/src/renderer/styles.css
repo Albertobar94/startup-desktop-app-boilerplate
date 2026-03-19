@@ -1,0 +1,10 @@
+@import "@acme/config/tailwind";
+
+/* Drag region for frameless window */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}

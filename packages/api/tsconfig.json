@@ -1,0 +1,9 @@
+{
+  "extends": "@acme/config/tsconfig/base",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "lib": ["ES2022", "DOM"]
+  },
+  "include": ["src"]
+}

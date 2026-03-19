@@ -33,7 +33,12 @@ const saveDialogOptionsSchema = z
   })
   .optional();
 
-// Tracks directories the user has explicitly opened or saved to via dialog.
+// Session-scoped directory grant: once the user opens or saves a file via the
+// native dialog, the parent directory is added here and remains accessible for
+// the lifetime of the process. This is an intentional UX trade-off — requiring
+// the user to re-authorise every read/write within the same session would be
+// disruptive. The grant is automatically revoked on app restart because this
+// Set is in-memory only and never persisted.
 const allowedDirectories = new Set<string>();
 
 function assertAllowed(absolute: string): void {
